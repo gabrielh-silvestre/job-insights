@@ -197,7 +197,9 @@ def matches_salary_range(
     return is_on_range
 
 
-def filter_by_salary_range(jobs, salary):
+def filter_by_salary_range(
+    jobs: List[Dict[str, int]], salary: int
+) -> List[Dict[str, int]]:
     """Filters a list of jobs by salary range
 
     Parameters
@@ -212,4 +214,14 @@ def filter_by_salary_range(jobs, salary):
     list
         Jobs whose salary range contains `salary`
     """
-    return []
+
+    filtered_jobs = [
+        job
+        for job in jobs
+        if type(job["max_salary"]) == int
+        and type(job["min_salary"]) == int
+        and type(salary) == int
+        and job["max_salary"] >= salary >= job["min_salary"]
+    ]
+
+    return filtered_jobs
