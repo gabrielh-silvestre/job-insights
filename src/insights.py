@@ -1,7 +1,8 @@
+from typing import List
 from jobs import read
 
 
-def get_unique_job_types(path: str):
+def get_unique_job_types(path: str) -> List[str]:
     """Checks all different job types and returns a list of them
 
     Must call `read`
