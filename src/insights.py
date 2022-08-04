@@ -42,7 +42,7 @@ def filter_by_job_type(jobs, job_type):
     return []
 
 
-def get_unique_industries(path):
+def get_unique_industries(path: str) -> List[str]:
     """Checks all different industries and returns a list of them
 
     Must call `read`
@@ -57,7 +57,11 @@ def get_unique_industries(path):
     list
         List of unique industries
     """
-    return []
+
+    all_jobs = read(path)
+    industry = [job["industry"] for job in all_jobs]
+
+    return list(set(industry))
 
 
 def filter_by_industry(jobs, industry):
