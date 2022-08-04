@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 from jobs import read
 
 
@@ -24,7 +24,9 @@ def get_unique_job_types(path: str) -> List[str]:
     return list(set(job_types))
 
 
-def filter_by_job_type(jobs, job_type):
+def filter_by_job_type(
+    jobs: List[Dict[str, str]], job_type: str
+) -> List[Dict[str, str]]:
     """Filters a list of jobs by job_type
 
     Parameters
@@ -39,7 +41,13 @@ def filter_by_job_type(jobs, job_type):
     list
         List of jobs with provided job_type
     """
-    return []
+    filtered_jobs = [
+        job
+        for job in jobs
+        if job["job_type"].lower() == job_type.lower()
+        ]
+
+    return filtered_jobs
 
 
 def get_unique_industries(path: str) -> List[str]:
