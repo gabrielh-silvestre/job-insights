@@ -72,7 +72,9 @@ def get_unique_industries(path: str) -> List[str]:
     return list(set(industry))
 
 
-def filter_by_industry(jobs, industry):
+def filter_by_industry(
+    jobs: List[Dict[str, str]], industry: str
+) -> List[Dict[str, str]]:
     """Filters a list of jobs by industry
 
     Parameters
@@ -87,7 +89,13 @@ def filter_by_industry(jobs, industry):
     list
         List of jobs with provided industry
     """
-    return []
+    filtered_jobs = [
+        job
+        for job in jobs
+        if job["industry"].lower() == industry.lower()
+        ]
+
+    return filtered_jobs
 
 
 def get_max_salary(path: str) -> int:
