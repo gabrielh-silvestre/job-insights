@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Union
 from src.jobs import read
 
 
@@ -156,7 +156,9 @@ def get_min_salary(path: str) -> int:
     return min(salaries)
 
 
-def matches_salary_range(job, salary):
+def matches_salary_range(
+    job: Dict[str, Union[str, int]], salary: Union[str, int]
+) -> bool:
     """Checks if a given salary is in the salary range of a given job
 
     Parameters
@@ -179,7 +181,20 @@ def matches_salary_range(job, salary):
         If `job["min_salary"]` is greather than `job["max_salary"]`
         If `salary` isn't a valid integer
     """
-    pass
+
+    max_salary = job.get("max_salary", None)
+    min_salary = job.get("min_salary", None)
+
+    if type(max_salary) != int or type(min_salary) != int:
+        raise ValueError()
+    elif max_salary < min_salary:
+        raise ValueError()
+    elif type(salary) != int:
+        raise ValueError()
+
+    is_on_range = max_salary >= salary >= min_salary
+
+    return is_on_range
 
 
 def filter_by_salary_range(jobs, salary):
